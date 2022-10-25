@@ -18,12 +18,12 @@ const ZOEERROR_UNPARSABLE_JSON    = 3;
 // name excluding extension
 // adapter will be restarted automatically every time as the configuration
 // changed, e.g system.adapter.mobile-alerts.0
-//var adapter = utils.adapter('zoe2');
+//var adapter = utils.adapter('zoe');
 let adapter;
 function startAdapter(options) {
   options = options || {};
   Object.assign(options, {
-       name: 'zoe2',
+       name: 'zoe',
        ready: main,
        unload: callback => {
 	       	try {

@@ -1,5 +1,5 @@
 ![Logo](admin/zoe.png)
-# iobroker.zoe2
+# iobroker.zoe
 =================
 
 Simple ioBroker-Adapter to get some basic values from Renault ZOE and use it in ioBroker. 

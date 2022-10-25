@@ -1,0 +1,147 @@
+{
+	"common": {
+		"name": "zoe2",
+		"version": "0.2.6",
+		"title": "Renault ZOE API v2",
+		"desc": {
+			"en": "Renault ZOE for ioBroker",
+			"de": "Renault ZOE für ioBroker"
+		},
+		"materialize": true,
+		"compact": true,
+		"dependencies": [
+            {
+                "js-controller": ">=3.0.0"
+            },
+            {
+                "admin":  ">=4.0.10"
+            }
+        ],
+        	"news": {
+				"0.2.6": {
+					"en": "API Timeout changeable, improved stability",
+					"de": "API Timeout konfigurierbar, Stabilitaet verbessert"
+				},
+				"0.2.5": {
+					"en": "adjusted errormessages, updated dependencies",
+					"de": "Fehlermeldungen verbessert, Projektabhaengigkeiten aktualisiert"
+				},
+				"0.2.4": {
+					"en": "replace request-libraray with axios",
+					"de": "die Request-Library durch axios ersetzt"
+				},
+ 	      		"0.2.3": {
+        			"en": "code adjustments and error handling",
+        			"de": "Codeanpassungen und Fehlerbehandlungen"
+        		},
+ 	      		"0.2.2": {
+        			"en": "store password encrypted",
+        			"de": "Passwort verschlüsselt abspeichern"
+        		},
+ 	      		"0.2.1": {
+        			"en": "code optimisation",
+        			"de": "code optimisation"
+        		},
+ 	      		"0.2.0": {
+        			"en": "adapter now supports compact mode",
+        			"de": "Adapter unterstützt nun den compact mode"
+        		},
+ 	      		"0.1.5": {
+        			"en": "bugfixes because gigya api parameter changed",
+        			"de": "Bugfixe da die Parameter bei gigya api geändert wurden"
+        		},
+ 	      		"0.1.4": {
+        			"en": "bugfixes and adding kamereonapikey, stopChargeWorkaroundHour in config screen",
+        			"de": "Bugfixe und kamereonapikey, stopChargeWorkaroundHour als Config-Parameter"
+        		},
+         		"0.1.3": {
+        			"en": "added setup-value useHVACApi",
+        			"de": "Setup-Parameter useHVACApi eingebaut"
+        		},
+        		"0.1.2": {
+        			"en": "added charge-start API-call on chargeEnable",
+        			"de": "Aufruf von charge-start API-call bei chargeEnable"
+        		},
+        		"0.1.1": {
+        			"en": "added chargeCancel and chargeEnable to controll charging-function if connected",
+        			"de": "chargeCancel und chargeEnable eingebaut um die Ladefunktion wenn verbunden zu kontrolieren"
+        		},
+        		"0.1.0": {
+        			"en": "fixed the Kamereon token issue",
+        			"de": "Bugfix: Kamereon token ausgebaut"
+        		},
+			"0.0.9": {
+				"en": "getLocation can be turned off on older ZOEs ",
+				"de": "getLocation kann in der Konfiguration ein oder ausgeschalten werden (fuer aeltere ZOEs)"
+			},
+			"0.0.8": {
+				"en": "Bugfixes remaining_Time, gps-coordinates",
+				"de": "Bugfixes bei remaining_Time und GPS-Koordinaten"
+			},
+			"0.0.7": {
+				"en": "Added: gpsLatitude, gpsLongitude (works only on newer ZOEs), small BugFix",
+				"de": "Neue Paramter: gpsLatitude, gpsLongitude (funktionieren nur auf neueren ZOEs); kleiner Bugfix"
+			},
+			"0.0.6": {
+				"en": "Added: chargingPower, batteryCapacity, batteryAvailableEnergy; using battery_status V2 API",
+				"de": "Neue Paramter: chargingPower, batteryCapacity, batteryAvailableEnergy; verwendung von battery_status V2 API"
+			},
+			"0.0.5": {
+				"en": "Added config parameter ignoreApiError",
+				"de": "Konfigurations-Parameter ignoreApiError hinzugefuegt"
+			},
+			"0.0.4": {
+				"en": "Added preconNow",
+				"de": "preconNow - Standheizung aktivieren - hinzugefuegt"
+			},
+			"0.0.3": {
+				"en": "Added total Mileage",
+				"de": "totalMileage - Totale KM - hinzugefuegt"
+			},
+            		"0.0.2": {
+                		"en": "Basic Readonly Features",
+                		"de": "Grundlegende, nur lesende, Fnktionen"
+	    		},
+			"0.0.1": {
+				"en": "Initial commit on github, not realy working",
+				"de": "Erster commit auf github, nicht wirklich funktionstuechtig"
+			}
+        	},
+		"platform": "Javascript/Node.js",
+	        "main": "main.js",
+		"mode": "schedule",
+		"schedule": "*/10 * * * *",
+		"enabled": true,
+		"license": "MIT",
+		"loglevel": "info",
+		"readme": "https://github.com/cko-koch/ioBroker.zoe/blob/master/README.md",
+		"icon": "zoe.png",
+		"extIcon": "https://raw.githubusercontent.com/cko-koch/ioBroker.zoe/master/admin/zoe.png",
+       		"authors": ["Christopher Koch"],
+		"keywords": ["ioBroker", "Renault ZOE", "Smart Home", "home automation", "mobility", "eCar", "electicity"],
+		"type": "vehicle",
+		"connectionType":"cloud",
+		"dataSource":"poll"
+	},
+	"native": {
+		"username": "",
+		"password": "",
+		"locale": "de_DE",
+		"ignoreApiError":0,
+		"vin":"",
+		"useLocationApi":1,
+		"useHVACApi":1,
+		"kamereonApiKey":"",
+		"stopChargeWorkaroundHour":23,
+		"timeout":3000
+	},
+	"encryptedNative": [
+       "password"
+   ],
+   "protectedNative": [
+       "password"
+   ],
+	"objects": [],
+	"instanceObjects": []
+
+}

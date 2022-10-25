@@ -1,0 +1,205 @@
+<html>
+<!-- these 4 files always have to be included -->
+<link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
+<link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+
+<script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../lib/css/jqGrid/ui.jqgrid-4.5.4.css"/>
+<link rel="stylesheet" type="text/css" href="../../lib/css/jquery.multiselect-1.13.css"/>
+
+<script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
+<script type="text/javascript" src="../../lib/js/jqGrid/jquery.jqGrid-4.5.4.min.js"></script>
+<script type="text/javascript" src="../../lib/js/jqGrid/grid.locale-all.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+<script type="text/javascript" src="../../js/translate.js"></script>
+<script type="text/javascript" src="../../lib/js/materialize.js"></script>
+<script type="text/javascript" src="../../js/adapter-settings.js"></script>
+<script type="text/javascript" src="words.js"></script>
+
+
+<!-- you have to define 2 functions in the global scope: -->
+<script type="text/javascript">
+	// Dictionary (systemDictionary is global variable from adapter-settings.js)
+  systemDictionary = {
+    "Renault ZOE adapter settings" : {
+      "de" : "Einstellungen für den Renault-ZOE-Adapter "
+    },
+    "On save adapter restarts with new config immediately" : {
+      "de" : "Beim Speichern der Einstellungen der Adapter wird neu gestartet."
+    },
+    "When selected the pure value is saved (useful if you want to do some further calculations)" : {
+      "de" : "Falls ausgewählt, wird der reine Zahlenwert gespeichert (nützlich wenn weitere Berechnungen erfolgen sollen)."
+    },
+    "Username" : { "de" : "Benutzername"},
+    "Password" : { "de" : "Kennwort"},
+    "Locale"   : { "de" : "Laenderversion, z.B. de_DE"},
+    "VIN" : { "de" : "Fahrgestellnummer"},
+    "IgnoreApiError" : { "de" : "Ignoriere API Fehler" },
+    "UseLocationApi" : { "de" : "Die LocationAPI verwenden" },
+    "UseHVACApi" : { "de" : "Die Vorheizen-API (HVAC) verwenden" },
+    "KamereonApiKey" : { "de" : "Kamereon API Key" },
+    "StopChargeWorkaroundHour": { "de" : "StopCharge: Stunde für Workaround" },
+    "Timeout": { "de" : "Timeout in ms" }
+  };
+
+  // the function loadSettings has to exist ...
+  function load(settings, onChange) {
+    console.log("***** load");
+    
+    	// default vallues
+    	if (!settings.kamereonApiKey) settings.kamereonApiKey="Ae9FDWugRxZQAGm3Sxgk7uJn6Q4CGEA2";
+    	if (!settings.stopChargeWorkaroundHour) settings.stopChargeWorkaroundHour=0;
+    
+	$('#username').val(settings.username).change(function() {
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+    
+	$('#password').val(settings.password).change(function() {
+		changed = true;
+		$('#save').button("enable");  
+	}).keyup(onChange);
+
+        $('#locale').val(settings.locale).change(function() {
+                changed = true;
+                $('#save').button("enable");
+        }).keyup(onChange);
+
+    
+	$('#vin').val(settings.vin).change(function() {
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+
+	$('#ignoreApiError').prop('checked',settings.ignoreApiError).click(function() {
+		//$('#ignoreApiError').prop('checked', !$('#ignoreApiError').prop('checked'));
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+	
+	$('#useLocationApi').prop('checked',settings.useLocationApi).click(function() {
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+	
+	$('#useHVACApi').prop('checked',settings.useHVACApi).click(function() {
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+	
+
+	$('#kamereonApiKey').val(settings.kamereonApiKey).change(function() {
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+	
+	$('#stopChargeWorkaroundHour').val(settings.stopChargeWorkaroundHour).change(function() {
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+
+	$('#timeout').val(settings.timeout).change(function() {
+		changed = true;
+		$('#save').button("enable");
+	}).keyup(onChange);
+	
+
+    onChange(false);
+  }
+
+  // ... and the function save has to exist.
+  // you have to make sure the callback is called with the settings object as first param!
+  function save(callback) {
+    console.log("***** save");
+    	var stopChargeWorkaroundHour=parseInt($('#stopChargeWorkaroundHour').val());
+    	if (stopChargeWorkaroundHour<0 || stopChargeWorkaroundHour>23) stopChargeWorkaroundHour=0;
+    	  
+	  callback({
+	    username : $('#username').val(),
+	    password : $('#password').val(),
+	    vin : $('#vin').val(),
+            locale : $('#locale').val(),
+	    ignoreApiError : $('#ignoreApiError').prop('checked'),
+	    useLocationApi : $('#useLocationApi').prop('checked'),
+	    useHVACApi : $('#useHVACApi').prop('checked'),
+	    kamereonApiKey: $('#kamereonApiKey').val(),
+	    stopChargeWorkaroundHour: stopChargeWorkaroundHour,
+	    timeout: $('#timeout').val()
+	  });
+  }
+</script>
+
+<!-- you have to put your config page in a div with id adapter-container -->
+<div id="adapter-container">
+
+  <table>
+    <tr>
+      <td><img src="zoe.png" /></td>
+      <td><h3 class="translate">Renault ZOE adapter settings</h3></td>
+    </tr>
+  </table>
+
+  <table style="padding-left: 24px">
+    <tr>
+      <td><label for="username" class="translate">Username</label></td>
+      <td><input class="value" type="text" id="username" size="30" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="password" class="translate">Password</label></td>
+      <td><input class="value" type="password" id="password" size="30" /></td>
+    </tr>
+
+    <tr>
+     <td><label for="locale" class="translate">Locale</label></td>
+      <td><input class="value" type="text" id="locale" size="10" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="vin" class="translate">VIN</label></td>
+      <td><input class="value" type="text" id="vin" size="30" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="ignoreApiError" class="translate">IgnoreApiError</label></td>
+      <td><input class="value" type="checkbox" id="ignoreApiError" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="useLocationApi" class="translate">UseLocationApi</label></td>
+      <td><input class="value" type="checkbox" id="useLocationApi" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="useHVACApi" class="translate">UseHVACApi</label></td>
+      <td><input class="value" type="checkbox" id="useHVACApi" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="kamereonApiKey" class="translate">KamereonApiKey</label></td>
+      <td><input class="value" type="text" id="kamereonApiKey" size="50" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="stopChargeWorkaroundHour" class="translate">StopChargeWorkaroundHour</label></td>
+      <td><input class="value" type="text" id="stopChargeWorkaroundHour" size="2" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="timeout" class="translate">Timeout in ms</label></td>
+      <td><input class="value" type="text" id="timeout" size="6" /></td>
+    </tr>
+
+
+  </table>
+  <br/><br/>
+  <p class="translate">On save adapter restarts with new config immediately</p>
+  If adapter stops working, please have a look at wiki</a>.
+</div>
+
+</html>

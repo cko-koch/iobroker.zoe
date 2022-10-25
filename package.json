@@ -1,0 +1,37 @@
+{
+  "name": "iobroker.zoe",
+  "version": "0.2.6",
+  "description": "Renault ZOE for ioBroker using API v2",
+  "author": {
+    "name": "Christopher Koch"
+  },
+  "homepage": "https://github.com/cko-koch/ioBroker.zoe.git",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "Renault ZOE",
+    "Smart Home",
+    "home automation",
+    "mobility",
+    "eCar",
+    "electicity"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cko-koch/ioBroker.zoe.git"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "@iobroker/adapter-core": ">=2.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2"
+  },
+  "main": "main.js",
+  "bugs": {
+    "url": "https://github.com/cko-koch/ioBroker.zoe/issues"
+  },
+  "readmeFilename": "README.md"
+}
